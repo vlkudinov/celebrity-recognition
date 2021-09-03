@@ -1,7 +1,5 @@
-import { SignInPayload } from 'src/model/user';
-
-async function signIn<T>(body: SignInPayload): Promise<T> {
-  const res = await fetch('http://localhost:5000/signin', {
+async function sendData<T, U>(url: string, body: U): Promise<T> {
+  const res = await fetch(url, {
     method: 'post',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(body),
@@ -14,4 +12,4 @@ async function signIn<T>(body: SignInPayload): Promise<T> {
   throw new Error(json);
 }
 
-export { signIn };
+export { sendData };

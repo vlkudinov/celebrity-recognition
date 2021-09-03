@@ -4,7 +4,7 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 
 export const BoxStyled = styled(Box)({
-  marginTop: 40,
+  marginTop: 64,
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
@@ -13,7 +13,7 @@ export const BoxStyled = styled(Box)({
 export const AvatarStyled = styled(Avatar)({},
   ({ theme }) => ({
     backgroundColor: theme.palette.secondary.main,
-    margin: 5,
+    margin: 8,
   }));
 
 export const Form = styled.form({
@@ -24,5 +24,5 @@ export const Form = styled.form({
 export const SubmitButton = styled(Button)({},
   ({ theme }) => ({
     backgroundColor: theme.palette.primary.main,
-    margin: '5px 0',
+    margin: '24px 0 16px',
   }));

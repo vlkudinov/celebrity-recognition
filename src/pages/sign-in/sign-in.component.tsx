@@ -10,7 +10,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Loader from 'src/components/loader/loader.component';
-import { UserState } from 'src/model';
+import { RootState } from 'src/model';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 import { signInStart } from '../../redux/user/user.reducer';
@@ -23,7 +23,7 @@ export default function SignIn() {
   const initialState = { email: '', password: '' };
   const [userCredentials, setCredentials] = useState(initialState);
   const { email, password } = userCredentials;
-  const loading = useSelector((state: UserState) => state.user.loading);
+  const loading = useSelector(({ user }: RootState) => user.loading);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

@@ -3,17 +3,29 @@ export interface SignInPayload {
   password: string;
 }
 
+export interface SignUpPayload {
+  email: string;
+  password: string;
+  firstName: string;
+  lastName: string;
+}
+
 export interface UserCredentials {
+  id: number;
+  firstName: string;
+  lastName: string;
   email: string;
   entries: string;
-  id: number;
   joined: string;
-  name: string;
 }
 
 export interface UserState {
-  user: User | null;
+  credentials: UserCredentials | null;
   isSignedIn: boolean;
   loading: boolean;
   error: unknown | null;
+}
+
+export interface RootState {
+  user: UserState
 }

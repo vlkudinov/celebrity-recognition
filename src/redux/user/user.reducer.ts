@@ -1,11 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { SignInPayload } from 'src/model/user';
+import { SignInPayload, SignUpPayload } from 'src/model/user';
 import { UserCredentials, UserState } from 'src/model';
 
 const userSlice = createSlice({
   name: 'user',
   initialState: {
-    user: null,
+    credentials: null,
     isSignedIn: false,
     loading: false,
     error: null,
@@ -15,7 +15,7 @@ const userSlice = createSlice({
       state.loading = true;
     },
     signInSuccess: (state: UserState, action:PayloadAction<UserCredentials>) => {
-      state.user = action.payload;
+      state.credentials = action.payload;
       state.isSignedIn = true;
       state.loading = false;
       state.error = null;
@@ -24,6 +24,25 @@ const userSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
+    signUpStart: (state: UserState, _: PayloadAction<SignUpPayload>) => {
+      state.loading = true;
+    },
+    signUpSuccess: (state: UserState, action:PayloadAction<UserCredentials>) => {
+      state.credentials = action.payload;
+      state.isSignedIn = true;
+      state.loading = false;
+      state.error = null;
+    },
+    signUpFailure: (state: UserState, action:PayloadAction<unknown>) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
+    signOut: (state: UserState) => {
+      state.credentials = null;
+      state.isSignedIn = false;
+      state.loading = false;
+      state.error = null;
+    },
   },
 });
 
@@ -31,6 +50,10 @@ export const {
   signInStart,
   signInSuccess,
   signInFailure,
+  signUpStart,
+  signUpSuccess,
+  signUpFailure,
+  signOut,
 } = userSlice.actions;
 
 export default userSlice.reducer;
