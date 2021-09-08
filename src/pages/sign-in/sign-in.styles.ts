@@ -10,19 +10,17 @@ export const BoxStyled = styled(Box)({
   alignItems: 'center',
 });
 
-export const AvatarStyled = styled(Avatar)({},
-  ({ theme }) => ({
-    backgroundColor: theme.palette.secondary.main,
-    margin: 8,
-  }));
+export const AvatarStyled = styled(Avatar)(({ theme }) => ({
+  backgroundColor: theme.palette.secondary.main,
+  margin: 8,
+}));
 
 export const Form = styled.form({
   width: '100%', // Fix IE 11 issue.
   marginTop: 10,
 });
 
-export const SubmitButton = styled(Button)({},
-  ({ theme }) => ({
-    backgroundColor: theme.palette.primary.main,
-    margin: '24px 0 16px',
-  }));
+export const SubmitButton = styled(Button)(({ theme }) => ({
+  backgroundColor: theme.palette.primary.main,
+  margin: '24px 0 16px',
+}));

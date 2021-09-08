@@ -25,7 +25,3 @@ export interface UserState {
   loading: boolean;
   error: unknown | null;
 }
-
-export interface RootState {
-  user: UserState
-}

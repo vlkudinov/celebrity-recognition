@@ -18,7 +18,7 @@ import {
   BoxStyled, AvatarStyled, Form, SubmitButton,
 } from './sign-in.styles';
 
-export default function SignIn() {
+export default function SignInPage() {
   const dispatch = useDispatch();
   const initialState = { email: '', password: '' };
   const [userCredentials, setCredentials] = useState(initialState);

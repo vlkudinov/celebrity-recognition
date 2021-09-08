@@ -8,7 +8,7 @@ import Menu from '@mui/material/Menu';
 import { Link as RouterLink } from 'react-router-dom';
 import Logo from 'src/components/logo/logo.component';
 import { signOut } from 'src/redux/user/user.reducer';
-import { NavigationContainer, MenuLink } from 'src/components/navigation/navigation.styles';
+import { MenuLink } from 'src/components/navigation/navigation.styles';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../model';
 
@@ -26,56 +26,54 @@ const Navigation : React.FC = () => {
   };
 
   return (
-    <NavigationContainer>
-      <AppBar position="static">
-        <Toolbar>
-          <Logo />
-          {isSignedIn ? (
+    <AppBar position="static">
+      <Toolbar>
+        <Logo />
+        {isSignedIn ? (
+          <div>
+            <IconButton
+              size="large"
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              onClick={handleMenu}
+              color="inherit"
+            >
+              <AccountCircle />
+            </IconButton>
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorEl}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              open={Boolean(anchorEl)}
+              onClose={handleClose}
+            >
+              <MenuItem onClick={handleClose}>Profile</MenuItem>
+              <MenuItem onClick={handleClose}>My account</MenuItem>
+              <MenuItem onClick={() => dispatch(signOut())}>Sign Out</MenuItem>
+            </Menu>
+          </div>
+        )
+          : (
             <div>
-              <IconButton
-                size="large"
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleMenu}
-                color="inherit"
-              >
-                <AccountCircle />
-              </IconButton>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorEl}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                open={Boolean(anchorEl)}
-                onClose={handleClose}
-              >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>My account</MenuItem>
-                <MenuItem onClick={() => dispatch(signOut())}>Sign Out</MenuItem>
-              </Menu>
+              <MenuLink component={RouterLink} to="/sign-in">
+                Sign in
+              </MenuLink>
+              <MenuLink component={RouterLink} to="/sign-up">
+                Sign up
+              </MenuLink>
             </div>
-          )
-            : (
-              <div>
-                <MenuLink component={RouterLink} to="/sign-in">
-                  Sign in
-                </MenuLink>
-                <MenuLink component={RouterLink} to="/sign-up">
-                  Sign up
-                </MenuLink>
-              </div>
-            )}
-        </Toolbar>
-      </AppBar>
-    </NavigationContainer>
+          )}
+      </Toolbar>
+    </AppBar>
   );
 };
 

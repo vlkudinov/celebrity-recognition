@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { SignInPayload, SignUpPayload } from 'src/model/user';
-import { UserCredentials, UserState } from 'src/model';
+import {
+  UserCredentials, UserState, SignInPayload, SignUpPayload,
+} from 'src/model';
 
 const userSlice = createSlice({
   name: 'user',

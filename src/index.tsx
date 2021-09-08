@@ -15,6 +15,12 @@ import reportWebVitals from './reportWebVitals';
 const myTheme = createTheme({
   palette: {
     mode: 'dark',
+    primary: {
+      main: '#1565c0',
+    },
+    secondary: {
+      main: '#6a1b9a',
+    },
   },
 });
 
