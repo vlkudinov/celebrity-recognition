@@ -25,7 +25,7 @@ interface BoundingBox {
   leftCol: number;
 }
 
-interface SendImagePayload {
+interface ImagePayload {
   id: string;
   value: number;
   concepts: ImageConcept[] | [];
@@ -42,5 +42,5 @@ export interface ImageState {
   concepts: ImageConcept[] | []
   box: Box | null;
   loading: boolean;
-  error: unknown | null;
+  error: Error | null ;
 }

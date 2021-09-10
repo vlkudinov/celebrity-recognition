@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {
-  Switch, Route, Redirect, useHistory,
+  Switch, Route, useHistory,
 } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from 'src/model';
@@ -16,9 +16,9 @@ export default function App() {
 
   // useEffect(() => {
   //   if (isSignedIn) {
-  //     history.push('/');
+  //     history-panel.push('/');
   //   } else {
-  //     history.push('/sign-in');
+  //     history-panel.push('/sign-in');
   //   }
   // });
 

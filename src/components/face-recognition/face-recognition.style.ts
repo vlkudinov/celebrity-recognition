@@ -13,7 +13,7 @@ export const FaceRecognitionContainer = styled.div({
 
 export const FaceRecognitionImage = styled.img({
   width: 'auto',
-  height: 600,
+  height: 560,
 });
 
 export const FaceRecognitionBoundingBox = styled.div((props: BoundingBoxProps) => ({
@@ -22,7 +22,7 @@ export const FaceRecognitionBoundingBox = styled.div((props: BoundingBoxProps) =
   bottom: `${props.faceLocation?.bottomRow}px`,
   left: `${props.faceLocation?.leftCol}px`,
   position: 'absolute',
-  boxShadow: `0 0 0 3px ${props.theme?.palette.primary.main} inset`,
+  boxShadow: `0 0 0 2px ${props.theme?.palette.primary.main} inset`,
   display: 'flex',
   flexWrap: 'wrap',
   justifyContent: 'center',
@@ -30,7 +30,7 @@ export const FaceRecognitionBoundingBox = styled.div((props: BoundingBoxProps) =
 }));
 
 export const FaceRecognitionResult = styled.span((props) => ({
-  display: props.children ? 'flex' : 'none',
+  display: props.children ? 'block' : 'none',
   backgroundColor: props.theme.palette.primary.main,
   marginRight: 'auto',
   marginTop: '-30px',
@@ -39,4 +39,7 @@ export const FaceRecognitionResult = styled.span((props) => ({
   boxSizing: 'content-box',
   textTransform: 'capitalize',
   whiteSpace: 'nowrap',
+  width: '100%',
+  overflow: 'hidden',
+  textOverflow: 'ellipsis',
 }));

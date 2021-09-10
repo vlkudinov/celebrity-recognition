@@ -34,7 +34,7 @@ export const selectFaceLocation = createSelector(
   },
 );
 
-export const selectResultValue = createSelector(
+export const selectMaxValuePrediction = createSelector(
   [selectImageConcepts],
   (concepts) => _.maxBy(concepts, 'value'),
 );

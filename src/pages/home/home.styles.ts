@@ -1,10 +1,11 @@
 import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
 import styled from '@emotion/styled';
 
-export const HomePageContainer = styled(Box)({
+export const HomePageContainer = styled(Grid)({
   flexGrow: 1,
-  marginTop: 16,
+  marginTop: 0,
+  height: 'calc(100% - 64px)',
+  flexWrap: 'nowrap',
 });
 
 export const ImageBlock = styled(Grid)({
@@ -12,10 +13,14 @@ export const ImageBlock = styled(Grid)({
   alignItems: 'center',
   justifyContent: 'center',
   position: 'relative',
+  height: '100%',
+  padding: '0px !important',
+  overflowY: 'scroll',
 });
 
 export const InputBlock = styled(Grid)(({ theme }) => ({
   backgroundColor: theme.palette.text.primary,
   padding: 30,
-  minHeight: '100vh',
+  height: '100%',
+  overflowY: 'scroll',
 }));

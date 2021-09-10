@@ -23,5 +23,5 @@ export interface UserState {
   credentials: UserCredentials | null;
   isSignedIn: boolean;
   loading: boolean;
-  error: unknown | null;
+  error: Error | null;
 }

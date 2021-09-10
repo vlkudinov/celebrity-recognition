@@ -3,10 +3,13 @@ import { ReactComponent as LogoSVG } from './logo.svg';
 
 export const LogoContainer = styled.div({
   marginRight: 'auto',
+  a: {
+    display: 'flex',
+  },
 });
 
-export const LogoIcon = styled(LogoSVG)({
-  width: 24,
-  height: 24,
-  fill: 'white',
-});
+export const LogoIcon = styled(LogoSVG)(({ theme }) => ({
+  width: 35,
+  height: 35,
+  fill: theme.palette.text.primary,
+}));

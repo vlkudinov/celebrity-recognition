@@ -1,9 +1,13 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { LogoContainer, LogoIcon } from './logo.styles';
 
 const Logo = () => (
   <LogoContainer>
-    <LogoIcon />
+    <Link to="/">
+      <LogoIcon />
+    </Link>
+
   </LogoContainer>
 );
 

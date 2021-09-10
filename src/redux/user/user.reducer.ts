@@ -21,7 +21,7 @@ const userSlice = createSlice({
       state.loading = false;
       state.error = null;
     },
-    signInFailure: (state: UserState, action:PayloadAction<unknown>) => {
+    signInFailure: (state: UserState, action:PayloadAction<Error>) => {
       state.loading = false;
       state.error = action.payload;
     },
@@ -34,7 +34,7 @@ const userSlice = createSlice({
       state.loading = false;
       state.error = null;
     },
-    signUpFailure: (state: UserState, action:PayloadAction<unknown>) => {
+    signUpFailure: (state: UserState, action:PayloadAction<Error>) => {
       state.loading = false;
       state.error = action.payload;
     },

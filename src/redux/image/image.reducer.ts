@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ImageState, SendImagePayload } from 'src/model';
+import { HistoryImage, ImageState, ImagePayload } from 'src/model';
 
 const imageSlice = createSlice({
   name: 'image',
@@ -28,16 +28,26 @@ const imageSlice = createSlice({
       state.loading = true;
       state.box = null;
       state.concepts = [];
+      state.imageUrl = '';
     },
-    sendImageSuccess: (state: ImageState, action: PayloadAction<SendImagePayload>) => {
+    sendImageSuccess: (state: ImageState, action: PayloadAction<ImagePayload>) => {
       state.loading = false;
       state.imageUrl = state.input;
       state.box = action.payload.box;
       state.concepts = action.payload.concepts;
+      state.error = null;
     },
-    sendImageFailure: (state: ImageState, action: PayloadAction<unknown>) => {
+    sendImageFailure: (state: ImageState, action: PayloadAction<Error>) => {
       state.loading = false;
       state.error = action.payload;
+    },
+    getImageFromHistory: (state: ImageState, action: PayloadAction<HistoryImage>) => {
+      const { link, box, concepts } = action.payload;
+
+      state.input = link;
+      state.imageUrl = link;
+      state.box = box;
+      state.concepts = concepts;
     },
   },
 });
@@ -48,6 +58,7 @@ export const {
   sendImageStart,
   sendImageSuccess,
   sendImageFailure,
+  getImageFromHistory,
 } = imageSlice.actions;
 
 export default imageSlice.reducer;

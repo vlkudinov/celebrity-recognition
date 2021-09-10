@@ -16,19 +16,19 @@ import {
 
 function* signInWorker({ payload } : PayloadAction<SignInPayload>) {
   try {
-    const user: UserCredentials = yield call(api.sendData, 'http://localhost:5000/sign-in', payload);
+    const user: UserCredentials = yield call(api.post, 'http://localhost:5000/sign-in', payload);
     yield put(signInSuccess(user));
   } catch (error) {
-    yield put(signInFailure(error));
+    yield put(signInFailure(error as Error));
   }
 }
 
 function* signUpWorker({ payload } : PayloadAction<SignUpPayload>) {
   try {
-    const user: UserCredentials = yield call(api.sendData, 'http://localhost:5000/sign-up', payload);
+    const user: UserCredentials = yield call(api.post, 'http://localhost:5000/sign-up', payload);
     yield put(signUpSuccess(user));
   } catch (error) {
-    yield put(signUpFailure(error));
+    yield put(signUpFailure(error as Error));
   }
 }
 
