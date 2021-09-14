@@ -25,11 +25,12 @@ interface BoundingBox {
   leftCol: number;
 }
 
-interface ImagePayload {
+interface ImageData {
   id: string;
   value: number;
-  concepts: ImageConcept[] | [];
-  box: ClarifaiBoundingBox | null;
+  name: string;
+  box: ClarifaiBoundingBox;
+  concepts: ImageConcept[];
 }
 
 export interface ImageState {
@@ -38,9 +39,7 @@ export interface ImageState {
   imageUrl: string;
   width: number;
   height: number;
-  value: number;
-  concepts: ImageConcept[] | []
-  box: Box | null;
   loading: boolean;
-  error: Error | null ;
+  error: Error | null;
+  data: ImageData[] | [];
 }

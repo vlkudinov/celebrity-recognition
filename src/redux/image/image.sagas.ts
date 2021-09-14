@@ -1,7 +1,7 @@
 import {
   takeLatest, call, put, all, select,
 } from 'redux-saga/effects';
-import { RootState, ImagePayload } from 'src/model';
+import { RootState, ImageData } from 'src/model';
 import * as api from 'src/api';
 import {
   updateHistoryStart,
@@ -15,7 +15,7 @@ import {
 function* sendImageWorker() {
   try {
     const input : string = yield select(({ image }: RootState) => image.input);
-    const image: ImagePayload = yield call(api.post, 'http://localhost:5000/imageurl', { input });
+    const image: ImageData[] | [] = yield call(api.post, 'http://localhost:5000/imageurl', { input });
     yield put(sendImageSuccess(image));
     yield put(updateHistoryStart());
   } catch (error) {

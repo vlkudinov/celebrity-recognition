@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
-import { RootState, HistoryImage } from 'src/model';
+import { HistoryImage } from 'src/model';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
-import Skeleton from '@mui/material/Skeleton';
 import { useDispatch, useSelector } from 'react-redux';
 import { ImageListItemBar, ListSubheader } from '@mui/material';
 import { getHistoryStart } from 'src/redux/history/history.reducer';
@@ -15,7 +14,6 @@ import {
 const HistoryPanel = () => {
   const dispatch = useDispatch();
   const imageList = useSelector(selectSortedImageList);
-  const loading = useSelector(({ history }: RootState) => history.loading);
   const [drawerIsOpened, setDrawerToggle] = React.useState(false);
 
   const toggleDrawer = () => {
@@ -51,9 +49,7 @@ const HistoryPanel = () => {
               onClick={() => handleClick(image)}
             >
               <img
-                style={{
-                  overflow: 'hidden',
-                }}
+                style={{ overflow: 'hidden' }}
                 src={image.link}
                 alt={image.name}
                 loading="lazy"

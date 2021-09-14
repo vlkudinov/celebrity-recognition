@@ -1,19 +1,19 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { HistoryImage, ImageState, ImagePayload } from 'src/model';
+import {
+  HistoryImage, ImageState, ImageData,
+} from 'src/model';
 
 const imageSlice = createSlice({
   name: 'image',
   initialState: {
+    id: '',
     input: '',
     imageUrl: '',
     width: 0,
     height: 0,
-    value: 0,
-    id: '',
-    box: null,
-    concepts: [],
     loading: false,
     error: null,
+    data: [],
   },
   reducers: {
     saveInput: (state: ImageState, action: PayloadAction<string>) => {
@@ -26,15 +26,13 @@ const imageSlice = createSlice({
     },
     sendImageStart: (state: ImageState) => {
       state.loading = true;
-      state.box = null;
-      state.concepts = [];
       state.imageUrl = '';
+      state.data = [];
     },
-    sendImageSuccess: (state: ImageState, action: PayloadAction<ImagePayload>) => {
+    sendImageSuccess: (state: ImageState, action: PayloadAction<ImageData[]>) => {
       state.loading = false;
       state.imageUrl = state.input;
-      state.box = action.payload.box;
-      state.concepts = action.payload.concepts;
+      state.data = action.payload;
       state.error = null;
     },
     sendImageFailure: (state: ImageState, action: PayloadAction<Error>) => {
@@ -42,12 +40,13 @@ const imageSlice = createSlice({
       state.error = action.payload;
     },
     getImageFromHistory: (state: ImageState, action: PayloadAction<HistoryImage>) => {
-      const { link, box, concepts } = action.payload;
-
+      const { link, data } = action.payload;
       state.input = link;
       state.imageUrl = link;
-      state.box = box;
-      state.concepts = concepts;
+      state.data = data;
+    },
+    getHoveredFaceId: (state: ImageState, action: PayloadAction<string>) => {
+      state.id = action.payload;
     },
   },
 });
@@ -59,6 +58,7 @@ export const {
   sendImageSuccess,
   sendImageFailure,
   getImageFromHistory,
+  getHoveredFaceId,
 } = imageSlice.actions;
 
 export default imageSlice.reducer;

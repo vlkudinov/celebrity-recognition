@@ -1,10 +1,16 @@
 import styled from '@emotion/styled';
 import { BoundingBox } from 'src/model';
 import { Theme } from '@emotion/react';
+import React from 'react';
 
-interface BoundingBoxProps {
+interface ResultProps {
+  hovered: boolean;
+  theme?: Theme;
+  children? : React.ReactNode
+}
+
+interface BoundingBoxProps extends ResultProps {
   faceLocation: BoundingBox | null,
-  theme?: Theme
 }
 
 export const FaceRecognitionContainer = styled.div({
@@ -16,30 +22,42 @@ export const FaceRecognitionImage = styled.img({
   height: 560,
 });
 
-export const FaceRecognitionBoundingBox = styled.div((props: BoundingBoxProps) => ({
-  top: `${props.faceLocation?.topRow}px`,
-  right: `${props.faceLocation?.rightCol}px`,
-  bottom: `${props.faceLocation?.bottomRow}px`,
-  left: `${props.faceLocation?.leftCol}px`,
-  position: 'absolute',
-  boxShadow: `0 0 0 2px ${props.theme?.palette.primary.main} inset`,
+// eslint-disable-next-line max-len
+export const FaceRecognitionBoundingBox = styled.div(({ theme, faceLocation, hovered }: BoundingBoxProps) => ({
   display: 'flex',
+  justifyContent: 'flex-start',
+  alignItems: 'flex-start',
   flexWrap: 'wrap',
-  justifyContent: 'center',
   cursor: 'pointer',
+  position: 'absolute',
+  top: `${faceLocation?.topRow}px`,
+  right: `${faceLocation?.rightCol}px`,
+  bottom: `${faceLocation?.bottomRow}px`,
+  left: `${faceLocation?.leftCol}px`,
+  boxShadow: `0 0 0 2px ${hovered ? theme?.palette.text.secondary : theme?.palette.primary.main} inset`,
+  transition: '.5s box-shadow',
 }));
 
-export const FaceRecognitionResult = styled.span((props) => ({
-  display: props.children ? 'block' : 'none',
-  backgroundColor: props.theme.palette.primary.main,
+export const FaceRecognitionResult = styled.span(({ theme, hovered, children }: ResultProps) => ({
+  display: children ? 'block' : 'none',
+  // fontSize: '0.8em',
+  backgroundColor:
+      hovered
+        ? theme?.palette.text.secondary
+        : theme?.palette.primary.main,
+  color:
+      hovered
+        ? theme?.palette.getContrastText(theme?.palette.text.primary)
+        : theme?.palette.text.primary,
   marginRight: 'auto',
   marginTop: '-30px',
   height: '20px',
   padding: '5px 10px',
   boxSizing: 'content-box',
   textTransform: 'capitalize',
+  transition: '.5s all',
   whiteSpace: 'nowrap',
-  width: '100%',
-  overflow: 'hidden',
-  textOverflow: 'ellipsis',
+  // width: hovered ? 'auto' : '100%',
+  // overflow: hovered ? 'unset' : 'hidden',
+  // textOverflow: 'ellipsis',
 }));

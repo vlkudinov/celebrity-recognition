@@ -16,7 +16,7 @@ export default function HomePage() {
       <ImageBlock item xs={8}>
         <FaceRecognition />
       </ImageBlock>
-      <InputBlock item>
+      <InputBlock item xs={4}>
         <ImageLinkFormWithAccordion />
         <PredictionListWithAccordion />
       </InputBlock>

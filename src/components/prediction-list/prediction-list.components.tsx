@@ -1,25 +1,30 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import Typography from '@mui/material/Typography';
-import { RootState } from 'src/model';
+import { selectPredictionList } from 'src/redux/image/image.selectors';
 import {
   PredictionListContainer, PredictionListItem, PredictionListName, PredictionListValue,
 } from './prediction-list.styles';
 
 const PredictionList = () => {
-  const concepts = useSelector(({ image }: RootState) => image.concepts);
+  const predictions = useSelector(selectPredictionList);
 
-  if (!concepts.length) {
+  if (!predictions.length) {
     return <Typography>NO PREDICTIONS</Typography>;
   }
 
   return (
     <PredictionListContainer>
-      {concepts.map(({ id, name, value }) => (
-        <PredictionListItem key={id}>
-          <PredictionListName>{name}</PredictionListName>
-          <PredictionListValue>{value.toFixed(2)}</PredictionListValue>
-        </PredictionListItem>
+      {predictions.map(({ concepts, id: id1 }) => (
+        <div style={{ marginTop: 20, borderBottom: '1px solid light-gray' }} key={id1}>
+          {concepts.map(({ id: id2, name, value }) => (
+            <PredictionListItem key={id2}>
+              <PredictionListName>{name}</PredictionListName>
+              <PredictionListValue>{value.toFixed(2)}</PredictionListValue>
+            </PredictionListItem>
+          ))}
+        </div>
+
       ))}
     </PredictionListContainer>
   );

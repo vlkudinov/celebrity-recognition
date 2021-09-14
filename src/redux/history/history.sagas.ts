@@ -1,7 +1,7 @@
 import {
   takeLatest, call, put, all, select,
 } from 'redux-saga/effects';
-import { HistoryImage, RootState, ImagePayload } from 'src/model';
+import { HistoryImage, RootState, ImageData } from 'src/model';
 import * as api from 'src/api';
 import {
   getHistoryStart,
@@ -10,7 +10,6 @@ import {
   updateHistorySuccess,
   updateHistoryFailure, updateHistoryStart,
 } from 'src/redux/history/history.reducer';
-import { selectMaxValuePrediction } from '../image/image.selectors';
 
 function* getHistoryWorker() {
   try {
@@ -24,12 +23,10 @@ function* getHistoryWorker() {
 
 function* updateHistoryWorker() {
   try {
-    const { name } = yield select(selectMaxValuePrediction);
     const imageUrl : string = yield select(({ image }: RootState) => image.imageUrl);
-    const box : string = yield select(({ image }: RootState) => image.box);
-    const concepts : string = yield select(({ image }: RootState) => image.concepts);
-    const image: ImagePayload = yield call(api.post, 'http://localhost:5000/image', {
-      imageUrl, name, box, id: 1, concepts,
+    const data : ImageData[] | [] = yield select(({ image }: RootState) => image.data);
+    yield call(api.post, 'http://localhost:5000/image', {
+      imageUrl, id: 1, data,
     });
     yield put(updateHistorySuccess());
     yield put(getHistoryStart());

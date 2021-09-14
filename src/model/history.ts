@@ -1,12 +1,11 @@
-import { ClarifaiBoundingBox, ImageConcept } from './image';
+import { ImageData } from './image';
 
 export interface HistoryImage {
   id: number;
   link: string;
   name: string;
   created_at: string;
-  concepts: ImageConcept[] | [];
-  box: ClarifaiBoundingBox | null;
+  data: ImageData[] | [];
 }
 
 export interface HistoryState {
