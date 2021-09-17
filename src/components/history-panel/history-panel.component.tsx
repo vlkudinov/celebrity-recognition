@@ -6,14 +6,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ImageListItemBar, ListSubheader } from '@mui/material';
 import { getHistoryStart } from 'src/redux/history/history.reducer';
 import { getImageFromHistory } from 'src/redux/image/image.reducer';
-import { selectSortedImageList } from 'src/redux/history/history.selectors';
+import { selectImageList } from 'src/redux/history/history.selectors';
 import {
   VerticalButton, ButtonPanel, HistoryPanelContainer, HistoryPanelDrawer,
 } from './history-panel.styles';
 
 const HistoryPanel = () => {
   const dispatch = useDispatch();
-  const imageList = useSelector(selectSortedImageList);
+  const imageList = useSelector(selectImageList);
   const [drawerIsOpened, setDrawerToggle] = React.useState(false);
 
   const toggleDrawer = () => {

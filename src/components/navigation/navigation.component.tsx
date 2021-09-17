@@ -3,13 +3,14 @@ import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import MenuItem from '@mui/material/MenuItem';
 import IconButton from '@mui/material/IconButton';
-import AccountCircle from '@mui/icons-material/AccountCircle';
+import Avatar from 'src/components/avatar/avatar.component';
 import Menu from '@mui/material/Menu';
 import { Link as RouterLink } from 'react-router-dom';
 import Logo from 'src/components/logo/logo.component';
-import { signOut } from 'src/redux/user/user.reducer';
+import { setProfileOpen, signOut } from 'src/redux/user/user.reducer';
 import { MenuLink } from 'src/components/navigation/navigation.styles';
 import { useDispatch, useSelector } from 'react-redux';
+import ProfileModal from 'src/components/profile-modal/profile-modal.component';
 import { RootState } from '../../model';
 
 const Navigation : React.FC = () => {
@@ -23,6 +24,16 @@ const Navigation : React.FC = () => {
 
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleProfileClick = () => {
+    dispatch(setProfileOpen(true));
+    handleClose();
+  };
+
+  const handleSignOut = () => {
+    dispatch(signOut());
+    handleClose();
   };
 
   return (
@@ -39,7 +50,7 @@ const Navigation : React.FC = () => {
               onClick={handleMenu}
               color="inherit"
             >
-              <AccountCircle />
+              <Avatar size="sm" />
             </IconButton>
             <Menu
               id="menu-appbar"
@@ -56,9 +67,8 @@ const Navigation : React.FC = () => {
               open={Boolean(anchorEl)}
               onClose={handleClose}
             >
-              <MenuItem onClick={handleClose}>Profile</MenuItem>
-              <MenuItem onClick={handleClose}>My account</MenuItem>
-              <MenuItem onClick={() => dispatch(signOut())}>Sign Out</MenuItem>
+              <MenuItem onClick={handleProfileClick}>Profile</MenuItem>
+              <MenuItem onClick={handleSignOut}>Sign Out</MenuItem>
             </Menu>
           </div>
         )
@@ -73,6 +83,7 @@ const Navigation : React.FC = () => {
             </div>
           )}
       </Toolbar>
+      {isSignedIn && <ProfileModal />}
     </AppBar>
   );
 };

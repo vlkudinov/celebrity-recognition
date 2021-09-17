@@ -22,6 +22,7 @@ export interface UserCredentials {
 export interface UserState {
   credentials: UserCredentials | null;
   isSignedIn: boolean;
+  isProfileOpened: boolean;
   loading: boolean;
   error: Error | null;
 }

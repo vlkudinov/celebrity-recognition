@@ -8,6 +8,7 @@ const userSlice = createSlice({
   initialState: {
     credentials: null,
     isSignedIn: false,
+    isProfileOpened: false,
     loading: false,
     error: null,
   },
@@ -44,6 +45,9 @@ const userSlice = createSlice({
       state.loading = false;
       state.error = null;
     },
+    setProfileOpen: (state: UserState, action:PayloadAction<boolean>) => {
+      state.isProfileOpened = action.payload;
+    },
   },
 });
 
@@ -55,6 +59,7 @@ export const {
   signUpSuccess,
   signUpFailure,
   signOut,
+  setProfileOpen,
 } = userSlice.actions;
 
 export default userSlice.reducer;

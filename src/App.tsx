@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Switch, Route, useHistory,
 } from 'react-router-dom';
@@ -16,9 +16,9 @@ export default function App() {
 
   // useEffect(() => {
   //   if (isSignedIn) {
-  //     history-panel.push('/');
+  //     history.push('/');
   //   } else {
-  //     history-panel.push('/sign-in');
+  //     history.push('/sign-in');
   //   }
   // });
 
