@@ -4,8 +4,6 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
-import Backdrop from '@mui/material/Backdrop';
-import CircularProgress from '@mui/material/CircularProgress';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
@@ -80,7 +78,7 @@ export default function SignInPage() {
           </SubmitButton>
           <Grid container>
             <Grid item>
-              <Link href="/" variant="body2">
+              <Link href="/sign-up" variant="body2">
                 Don&apos;t have an account? Sign Up
               </Link>
             </Grid>

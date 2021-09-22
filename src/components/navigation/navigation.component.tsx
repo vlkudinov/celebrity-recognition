@@ -7,7 +7,7 @@ import Avatar from 'src/components/avatar/avatar.component';
 import Menu from '@mui/material/Menu';
 import { Link as RouterLink } from 'react-router-dom';
 import Logo from 'src/components/logo/logo.component';
-import { setProfileOpen, signOut } from 'src/redux/user/user.reducer';
+import { setProfileOpen, signOutStart } from 'src/redux/user/user.reducer';
 import { MenuLink } from 'src/components/navigation/navigation.styles';
 import { useDispatch, useSelector } from 'react-redux';
 import ProfileModal from 'src/components/profile-modal/profile-modal.component';
@@ -15,6 +15,7 @@ import { RootState } from '../../model';
 
 const Navigation : React.FC = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const userId = useSelector((state: RootState) => state.user.credentials?.id);
   const isSignedIn = useSelector((state: RootState) => state.user.isSignedIn);
   const dispatch = useDispatch();
 
@@ -32,7 +33,7 @@ const Navigation : React.FC = () => {
   };
 
   const handleSignOut = () => {
-    dispatch(signOut());
+    dispatch(signOutStart());
     handleClose();
   };
 
@@ -83,7 +84,7 @@ const Navigation : React.FC = () => {
             </div>
           )}
       </Toolbar>
-      {isSignedIn && <ProfileModal />}
+      {userId && <ProfileModal />}
     </AppBar>
   );
 };

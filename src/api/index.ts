@@ -10,16 +10,24 @@ const handleResponse = async<T> (res: Response) : Promise<T> => {
 async function post<T, U>(url: string, body: U): Promise<T> {
   const res = await fetch(url, {
     method: 'post',
-    headers: { 'Content-Type': 'application/json' },
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: window.sessionStorage.getItem('token') || '',
+    },
     body: JSON.stringify(body),
   });
 
   return handleResponse(res);
 }
 
-async function get<T>(url: string, params: { id: number }): Promise<T> {
-  const { id } = params;
-  const res = await fetch(`${url}?id=${id}`);
+async function get<T>(url: string): Promise<T> {
+  const res = await fetch(url, {
+    method: 'get',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: window.sessionStorage.getItem('token') || '',
+    },
+  });
 
   return handleResponse(res);
 }

@@ -10,6 +10,18 @@ export interface SignUpPayload {
   lastName: string;
 }
 
+export interface UpdateProfilePayload {
+  firstName: string;
+  lastName: string;
+  age: number;
+}
+
+export interface UserAuthResponse {
+  success: boolean;
+  userId: number;
+  token: string;
+}
+
 export interface UserCredentials {
   id: number;
   firstName: string;
@@ -17,6 +29,7 @@ export interface UserCredentials {
   email: string;
   entries: string;
   joined: string;
+  age: number;
 }
 
 export interface UserState {
