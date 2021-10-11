@@ -14,7 +14,7 @@ import {
 function* getHistoryWorker() {
   try {
     const userId : string = yield select(({ user }: RootState) => user.credentials?.id);
-    const history: HistoryImage[] = yield call(api.get, `http://188.166.167.236:5000/history/${userId}`);
+    const history: HistoryImage[] = yield call(api.get, `${process.env.REACT_APP_API_URL}/history/${userId}`);
     yield put(getHistorySuccess(history));
   } catch (error) {
     yield put(getHistoryFailure(error as Error));
@@ -26,7 +26,7 @@ function* updateHistoryWorker() {
     const userId : string = yield select(({ user }: RootState) => user.credentials?.id);
     const imageUrl : string = yield select(({ image }: RootState) => image.imageUrl);
     const data : ImageData[] | [] = yield select(({ image }: RootState) => image.data);
-    yield call(api.post, 'http://188.166.167.236:5000/image', {
+    yield call(api.post, `${process.env.REACT_APP_API_URL}/image`, {
       imageUrl, id: userId, data,
     });
     yield put(updateHistorySuccess());

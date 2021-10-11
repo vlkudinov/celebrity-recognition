@@ -38,7 +38,7 @@ function* getSnapshotFromUserAuth(userAuth : UserAuthResponse) {
 
 function* signInWorker({ payload } : PayloadAction<SignInPayload>) {
   try {
-    const userAuth: UserAuthResponse = yield call(api.post, 'http://188.166.167.236:5000/sign-in', payload);
+    const userAuth: UserAuthResponse = yield call(api.post, `${process.env.REACT_APP_API_URL}/sign-in`, payload);
 
     yield getSnapshotFromUserAuth(userAuth);
   } catch (error) {
@@ -48,7 +48,7 @@ function* signInWorker({ payload } : PayloadAction<SignInPayload>) {
 
 function* signUpWorker({ payload } : PayloadAction<SignUpPayload>) {
   try {
-    const userAuth: UserAuthResponse = yield call(api.post, 'http://188.166.167.236:5000/sign-up', payload);
+    const userAuth: UserAuthResponse = yield call(api.post, `${process.env.REACT_APP_API_URL}/sign-up`, payload);
 
     yield put(signUpSuccess(userAuth));
   } catch (error) {
@@ -59,7 +59,7 @@ function* signUpWorker({ payload } : PayloadAction<SignUpPayload>) {
 function* signOutWorker() {
   try {
     const id : string = yield select(({ user }: RootState) => user?.credentials?.id);
-    const userAuth: UserAuthResponse = yield call(api.post, 'http://188.166.167.236:5000/sign-out', { id });
+    const userAuth: UserAuthResponse = yield call(api.post, `${process.env.REACT_APP_API_URL}/sign-out`, { id });
     yield call(removeToken);
     yield put(signOutSuccess(userAuth));
   } catch (error) {
@@ -70,7 +70,7 @@ function* signOutWorker() {
 function* getProfileWorker({ payload } : PayloadAction<UserAuthResponse>) {
   try {
     const { userId: id } = payload;
-    const credentials: UserCredentials = yield call(api.get, `http://188.166.167.236:5000/profile/${id}`);
+    const credentials: UserCredentials = yield call(api.get, `${process.env.REACT_APP_API_URL}/profile/${id}`);
     yield put(getProfileSuccess(credentials));
   } catch (error) {
     yield put(getProfileFailure(error as Error));
@@ -80,7 +80,7 @@ function* getProfileWorker({ payload } : PayloadAction<UserAuthResponse>) {
 function* updateProfileWorker({ payload } : PayloadAction<UpdateProfilePayload>) {
   try {
     const id : string = yield select(({ user }: RootState) => user?.credentials?.id);
-    yield call(api.post, `http://188.166.167.236:5000/profile/${id}`, { formInput: payload });
+    yield call(api.post, `${process.env.REACT_APP_API_URL}/profile/${id}`, { formInput: payload });
     yield put(updateProfileSuccess());
     yield put(setProfileOpen(false));
   } catch (error) {

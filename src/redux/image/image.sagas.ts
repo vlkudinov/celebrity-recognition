@@ -15,7 +15,7 @@ import {
 function* sendImageWorker() {
   try {
     const input : string = yield select(({ image }: RootState) => image.input);
-    const image: ImageData[] | [] = yield call(api.post, 'http://188.166.167.236:5000/imageurl', { input });
+    const image: ImageData[] | [] = yield call(api.post, `${process.env.REACT_APP_API_URL}/imageurl`, { input });
     yield put(sendImageSuccess(image));
     yield put(updateHistoryStart());
   } catch (error) {
