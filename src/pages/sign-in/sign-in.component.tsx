@@ -1,12 +1,11 @@
 import * as React from 'react';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import { Link as RouterLink } from 'react-router-dom';
+import Link from '@mui/material/Link';
 import Loader from 'src/components/loader/loader.component';
 import { RootState } from 'src/model';
 import { useDispatch, useSelector } from 'react-redux';
@@ -69,16 +68,12 @@ export default function SignInPage() {
             value={password}
             onChange={handleChange}
           />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
           <SubmitButton type="submit" fullWidth variant="contained">
             Sign In
           </SubmitButton>
           <Grid container>
             <Grid item>
-              <Link href="/sign-up" variant="body2">
+              <Link component={RouterLink} to="/sign-up" variant="body2">
                 Don&apos;t have an account? Sign Up
               </Link>
             </Grid>

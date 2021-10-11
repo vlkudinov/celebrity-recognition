@@ -20,6 +20,6 @@ export const selectUserNameInitials = createSelector(
     const firstNameCapitalLetter = getFirstCapitalLetter(credentials?.firstName);
     const lastNameCapitalLetter = getFirstCapitalLetter(credentials?.lastName);
 
-    return `${firstNameCapitalLetter} ${lastNameCapitalLetter}`;
+    return `${firstNameCapitalLetter}${lastNameCapitalLetter}`;
   },
 );

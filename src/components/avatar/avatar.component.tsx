@@ -8,7 +8,7 @@ const Avatar : React.FC<AvatarProps> = ({ size } : AvatarProps) => {
   const userNameInitials = useSelector(selectUserNameInitials);
 
   return (
-    <AvatarString size={size}>{userNameInitials && 'FL'}</AvatarString>
+    <AvatarString size={size}>{userNameInitials}</AvatarString>
   );
 };
 
