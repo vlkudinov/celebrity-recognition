@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import CustomizedSnackbarProvider from 'src/components/customized-snackbar-provider/customized-snackbar-provider.component';
 import { ThemeProvider } from 'styled-components';
 import {
   ThemeProvider as MuiThemeProvider, createTheme,
@@ -27,14 +28,16 @@ const myTheme = createTheme({
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <BrowserRouter>
-        <MuiThemeProvider theme={myTheme}>
-          <ThemeProvider theme={myTheme}>
-            <CssBaseline />
-            <App />
-          </ThemeProvider>
-        </MuiThemeProvider>
-      </BrowserRouter>
+      <CustomizedSnackbarProvider>
+        <BrowserRouter>
+          <MuiThemeProvider theme={myTheme}>
+            <ThemeProvider theme={myTheme}>
+              <CssBaseline />
+              <App />
+            </ThemeProvider>
+          </MuiThemeProvider>
+        </BrowserRouter>
+      </CustomizedSnackbarProvider>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root'),

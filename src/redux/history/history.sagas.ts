@@ -10,29 +10,32 @@ import {
   updateHistorySuccess,
   updateHistoryFailure, updateHistoryStart,
 } from 'src/redux/history/history.reducer';
+import { enqueueSnackbar } from 'src/redux/snackbar/snackbar.reducer';
 
 function* getHistoryWorker() {
   try {
-    const userId : string = yield select(({ user }: RootState) => user.credentials?.id);
-    const history: HistoryImage[] = yield call(api.get, `${process.env.REACT_APP_API_URL}/history/${userId}`);
+    const userId : string = yield select(({ user }: RootState) => user.id);
+    const history: HistoryImage[] = yield call(api.get, `history/${userId}`);
     yield put(getHistorySuccess(history));
   } catch (error) {
-    yield put(getHistoryFailure(error as Error));
+    yield put(enqueueSnackbar({ message: error.message }));
+    yield put(getHistoryFailure(error));
   }
 }
 
 function* updateHistoryWorker() {
   try {
-    const userId : string = yield select(({ user }: RootState) => user.credentials?.id);
+    const userId : string = yield select(({ user }: RootState) => user.id);
     const imageUrl : string = yield select(({ image }: RootState) => image.imageUrl);
     const data : ImageData[] | [] = yield select(({ image }: RootState) => image.data);
-    yield call(api.post, `${process.env.REACT_APP_API_URL}/image`, {
+    yield call(api.post, 'image', {
       imageUrl, id: userId, data,
     });
     yield put(updateHistorySuccess());
     yield put(getHistoryStart());
   } catch (error) {
-    yield put(updateHistoryFailure());
+    yield put(enqueueSnackbar({ message: error.message }));
+    yield put(updateHistoryFailure(error));
   }
 }
 

@@ -15,7 +15,7 @@ import { RootState } from '../../model';
 
 const Navigation : React.FC = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const userId = useSelector((state: RootState) => state.user.credentials?.id);
+  const userCredentials = useSelector((state: RootState) => state.user.credentials);
   const isSignedIn = useSelector((state: RootState) => state.user.isSignedIn);
   const dispatch = useDispatch();
 
@@ -84,7 +84,7 @@ const Navigation : React.FC = () => {
             </div>
           )}
       </Toolbar>
-      {userId && <ProfileModal />}
+      {userCredentials && <ProfileModal />}
     </AppBar>
   );
 };

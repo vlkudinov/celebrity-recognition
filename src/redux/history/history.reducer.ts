@@ -22,7 +22,9 @@ const historySlice = createSlice({
     },
     updateHistoryStart: () => {},
     updateHistorySuccess: () => {},
-    updateHistoryFailure: () => {},
+    updateHistoryFailure: (state:HistoryState, action: PayloadAction<Error>) => {
+      state.error = action.payload;
+    },
   },
 });
 

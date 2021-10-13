@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction, PayloadActionCreator } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import {
   UserCredentials, UserState, SignInPayload, SignUpPayload, UpdateProfilePayload, UserAuthResponse,
 } from 'src/model';
@@ -6,6 +6,7 @@ import {
 const userSlice = createSlice({
   name: 'user',
   initialState: {
+    id: null,
     credentials: null,
     isSignedIn: false,
     isProfileOpened: false,
@@ -20,6 +21,7 @@ const userSlice = createSlice({
     },
     signInSuccess: (state: UserState, action:PayloadAction<UserAuthResponse>) => {
       state.isSignedIn = action.payload.success;
+      state.id = action.payload.userId;
       state.loading = false;
     },
     signInFailure: (state: UserState, action:PayloadAction<Error>) => {
@@ -31,7 +33,7 @@ const userSlice = createSlice({
       state.loading = true;
       state.error = null;
     },
-    signUpSuccess: (state: UserState, action:PayloadAction<UserAuthResponse>) => {
+    signUpSuccess: (state: UserState, _:PayloadAction<UserAuthResponse>) => {
       state.loading = false;
     },
     signUpFailure: (state: UserState, action:PayloadAction<Error>) => {
@@ -43,7 +45,7 @@ const userSlice = createSlice({
       state.loading = true;
       state.error = null;
     },
-    signOutSuccess: (state: UserState, action:PayloadAction<UserAuthResponse>) => {
+    signOutSuccess: (state: UserState, _:PayloadAction<{ message: string }>) => {
       state.credentials = null;
       state.isSignedIn = false;
       state.loading = false;
@@ -53,12 +55,12 @@ const userSlice = createSlice({
       state.error = action.payload;
     },
 
-    getProfileStart: (state: UserState, _: PayloadAction<UserAuthResponse>) => {
+    getProfileStart: (state: UserState) => {
       state.loading = true;
       state.error = null;
     },
-    getProfileSuccess: (state: UserState, action:PayloadAction<UserCredentials>) => {
-      state.credentials = action.payload;
+    getProfileSuccess: (state: UserState, action:PayloadAction<{ credentials: UserCredentials, message: string }>) => {
+      state.credentials = action.payload.credentials;
       state.loading = false;
     },
     getProfileFailure: (state: UserState, action: PayloadAction<Error>) => {
@@ -70,7 +72,7 @@ const userSlice = createSlice({
       state.loading = true;
       state.error = null;
     },
-    updateProfileSuccess: (state: UserState) => {
+    updateProfileSuccess: (state: UserState, _: PayloadAction<{ userId: number, message: string }>) => {
       state.loading = false;
     },
     updateProfileFailure: (state: UserState, action: PayloadAction<Error>) => {

@@ -15,11 +15,11 @@ import {
 function* sendImageWorker() {
   try {
     const input : string = yield select(({ image }: RootState) => image.input);
-    const image: ImageData[] | [] = yield call(api.post, `${process.env.REACT_APP_API_URL}/imageurl`, { input });
+    const image: ImageData[] | [] = yield call(api.post, 'imageurl', { input });
     yield put(sendImageSuccess(image));
     yield put(updateHistoryStart());
   } catch (error) {
-    yield put(sendImageFailure(error as Error));
+    yield put(sendImageFailure(error));
   }
 }
 

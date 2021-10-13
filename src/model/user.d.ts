@@ -16,14 +16,17 @@ export interface UpdateProfilePayload {
   age: number;
 }
 
-export interface UserAuthResponse {
-  success: boolean;
+export interface UserId {
   userId: number;
+}
+
+export interface UserAuthResponse extends UserId{
+  success: boolean;
   token: string;
 }
 
 export interface UserCredentials {
-  id: number;
+  id?: number;
   firstName: string;
   lastName: string;
   email: string;
@@ -33,6 +36,7 @@ export interface UserCredentials {
 }
 
 export interface UserState {
+  id: number | null
   credentials: UserCredentials | null;
   isSignedIn: boolean;
   isProfileOpened: boolean;
