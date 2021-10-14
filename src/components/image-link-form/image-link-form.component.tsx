@@ -2,9 +2,9 @@ import React from 'react';
 import Button from '@mui/material/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import InputAdornment from '@mui/material/InputAdornment';
-import { RootState } from '../../model';
-import { saveInput, sendImageStart } from '../../redux/image/image.reducer';
-import { WhiteBorderTextField, BlackClearIcon } from './image-link-form.styles';
+import { RootState } from 'src/model';
+import { saveInput, sendImageStart } from 'src/redux/image/image.reducer';
+import { BlackClearIcon, WhiteBorderTextField } from './image-link-form.styles';
 
 const ImageLinkForm = () => {
   const dispatch = useDispatch();
@@ -24,9 +24,10 @@ const ImageLinkForm = () => {
   };
 
   return (
-    <>
+    <form onSubmit={handleSubmit}>
       <WhiteBorderTextField
         fullWidth
+        required
         helperText="link should contain file extension (.jpg, .png and etc.)"
         label="Image link"
         value={input}
@@ -39,8 +40,8 @@ const ImageLinkForm = () => {
           ),
         }}
       />
-      <Button variant="contained" fullWidth sx={{ marginTop: '15px' }} onClick={handleSubmit}>Send Link</Button>
-    </>
+      <Button type="submit" variant="contained" fullWidth sx={{ marginTop: '15px' }}>Send Link</Button>
+    </form>
   );
 };
 

@@ -7,3 +7,8 @@ export const selectImageList = createSelector(
   [selectHistoryState],
   (history) => history.images,
 );
+
+export const selectHistoryLength = createSelector(
+  [selectImageList],
+  (images) => images.length,
+);

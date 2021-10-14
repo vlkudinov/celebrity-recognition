@@ -1,12 +1,15 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setImageSize, getHoveredFaceId } from 'src/redux/image/image.reducer';
+import { getHoveredFaceId, setImageSize } from 'src/redux/image/image.reducer';
 import { RootState } from 'src/model';
 import { selectFaceLocation } from 'src/redux/image/image.selectors';
 import Skeleton from '@mui/material/Skeleton';
 import Typography from '@mui/material/Typography';
 import {
-  FaceRecognitionContainer, FaceRecognitionImage, FaceRecognitionBoundingBox, FaceRecognitionResult,
+  FaceRecognitionBoundingBox,
+  FaceRecognitionContainer,
+  FaceRecognitionImage,
+  FaceRecognitionResult,
 } from './face-recognition.style';
 
 const FaceRecognition = () => {

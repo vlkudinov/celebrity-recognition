@@ -48,6 +48,13 @@ const imageSlice = createSlice({
     getHoveredFaceId: (state: ImageState, action: PayloadAction<string>) => {
       state.id = action.payload;
     },
+    resetImageState: (state: ImageState) => {
+      state.input = '';
+      state.imageUrl = '';
+      state.width = 0;
+      state.height = 0;
+      state.data = [];
+    },
   },
 });
 
@@ -59,6 +66,7 @@ export const {
   sendImageFailure,
   getImageFromHistory,
   getHoveredFaceId,
+  resetImageState,
 } = imageSlice.actions;
 
 export default imageSlice.reducer;

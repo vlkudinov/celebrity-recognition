@@ -8,12 +8,12 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
-import { RootState } from '../../model';
-import { signUpStart } from '../../redux/user/user.reducer';
+import { RootState } from 'src/model';
+import { signUpStart } from 'src/redux/user/user.reducer';
+import Loader from 'src/components/loader/loader.component';
 import {
   BoxStyled, AvatarStyled, Form, SubmitButton,
 } from './sign-up.styles';
-import Loader from '../../components/loader/loader.component';
 
 export default function SignUpPage() {
   const dispatch = useDispatch();
@@ -28,10 +28,7 @@ export default function SignUpPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
-    dispatch(signUpStart({
-      email, password, firstName, lastName,
-    }));
+    dispatch(signUpStart(userCredentials));
     setCredentials(initialState);
   };
 
@@ -49,7 +46,7 @@ export default function SignUpPage() {
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
-        <Form noValidate onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField

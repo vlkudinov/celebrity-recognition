@@ -12,8 +12,8 @@ import {
   getProfileSuccess,
   updateProfileFailure,
   updateProfileSuccess, signOutSuccess,
-} from '../user/user.reducer';
-import { getHistoryFailure, updateHistoryFailure } from '../history/history.reducer';
+} from 'src/redux/user/user.reducer';
+import { getHistoryFailure, updateHistoryFailure } from 'src/redux/history/history.reducer';
 
 function* showSuccessSnackbar<T>({ payload } : PayloadAction<{ message: string }>) {
   if (payload.message) {

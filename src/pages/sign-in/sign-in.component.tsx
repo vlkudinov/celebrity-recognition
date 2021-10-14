@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
@@ -9,14 +9,14 @@ import Link from '@mui/material/Link';
 import Loader from 'src/components/loader/loader.component';
 import { RootState } from 'src/model';
 import { useDispatch, useSelector } from 'react-redux';
-import { useState } from 'react';
-import { signInStart } from '../../redux/user/user.reducer';
+import { signInStart } from 'src/redux/user/user.reducer';
 import {
   BoxStyled, AvatarStyled, Form, SubmitButton,
 } from './sign-in.styles';
 
 export default function SignInPage() {
   const dispatch = useDispatch();
+
   const initialState = { email: '', password: '' };
   const [userCredentials, setCredentials] = useState(initialState);
   const { email, password } = userCredentials;
@@ -24,7 +24,6 @@ export default function SignInPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
     dispatch(signInStart({ email, password }));
     setCredentials(initialState);
   };
@@ -43,7 +42,7 @@ export default function SignInPage() {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <Form onSubmit={handleSubmit} noValidate>
+        <Form onSubmit={handleSubmit}>
           <TextField
             margin="normal"
             required

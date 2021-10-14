@@ -15,6 +15,7 @@ import DateRangeRoundedIcon from '@mui/icons-material/DateRangeRounded';
 import Avatar from 'src/components/avatar/avatar.component';
 import { selectUserFullName } from 'src/redux/user/user.selectors';
 import { useState } from 'react';
+import { selectHistoryLength } from 'src/redux/history/history.selectors';
 import {
   ModalBox, ModalProfileSubtitle, ModalAvatarContainer, ModalButtonGroup,
 } from './profile-modal.styles';
@@ -23,9 +24,10 @@ const ProfileModal = () => {
   const dispatch = useDispatch();
   const isProfileOpened = useSelector(({ user } : RootState) => user.isProfileOpened);
   const {
-    firstName, lastName, entries, joined, age,
+    firstName, lastName, joined, age,
   } = useSelector(({ user } : RootState) => user.credentials!);
   const fullName = useSelector(selectUserFullName);
+  const entries = useSelector(selectHistoryLength);
 
   const initialState = { firstName, lastName, age };
   const [userCredentials, setCredentials] = useState(initialState);
@@ -77,6 +79,7 @@ const ProfileModal = () => {
             <form onSubmit={handleFormSubmit}>
               <TextField
                 name="firstName"
+                required
                 fullWidth
                 id="firstName"
                 label="First Name"
@@ -86,8 +89,9 @@ const ProfileModal = () => {
                 onChange={handleChange}
               />
               <TextField
-                fullWidth
                 id="lastName"
+                fullWidth
+                required
                 label="Last Name"
                 margin="normal"
                 name="lastName"

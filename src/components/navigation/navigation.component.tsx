@@ -11,7 +11,7 @@ import { setProfileOpen, signOutStart } from 'src/redux/user/user.reducer';
 import { MenuLink } from 'src/components/navigation/navigation.styles';
 import { useDispatch, useSelector } from 'react-redux';
 import ProfileModal from 'src/components/profile-modal/profile-modal.component';
-import { RootState } from '../../model';
+import { RootState } from 'src/model';
 
 const Navigation : React.FC = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);

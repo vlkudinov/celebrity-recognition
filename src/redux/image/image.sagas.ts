@@ -6,10 +6,11 @@ import * as api from 'src/api';
 import {
   updateHistoryStart,
 } from 'src/redux/history/history.reducer';
+import { signOutSuccess } from 'src/redux/user/user.reducer';
 import {
   sendImageStart,
   sendImageSuccess,
-  sendImageFailure,
+  sendImageFailure, resetImageState,
 } from './image.reducer';
 
 function* sendImageWorker() {
@@ -23,12 +24,21 @@ function* sendImageWorker() {
   }
 }
 
+function* onSignOutWorker() {
+  yield put(resetImageState());
+}
+
 function* sendImageWatcher() {
   yield takeLatest(sendImageStart, sendImageWorker);
+}
+
+function* onSignOut() {
+  yield takeLatest(signOutSuccess, onSignOutWorker);
 }
 
 export function* imageSagas() {
   yield all([
     call(sendImageWatcher),
+    call(onSignOut),
   ]);
 }

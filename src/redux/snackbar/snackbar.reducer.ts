@@ -12,8 +12,7 @@ const snackbarSlice = createSlice({
       const key = new Date().getTime() + Math.random();
       const newNotification : Notification = {
         key,
-        message: action.payload.message,
-        options: { ...action.payload.options },
+        ...action.payload,
       };
 
       state.notifications = [
