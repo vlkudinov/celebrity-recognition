@@ -43,6 +43,8 @@ const imageSlice = createSlice({
       const { link, data } = action.payload;
       state.input = link;
       state.imageUrl = link;
+      state.width = 0;
+      state.height = 0;
       state.data = data;
     },
     getHoveredFaceId: (state: ImageState, action: PayloadAction<string>) => {

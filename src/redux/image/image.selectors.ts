@@ -3,7 +3,7 @@ import { RootState } from 'src/model';
 
 const selectImageState = (state : RootState) => state.image;
 
-const selectImageBoundingBox = createSelector(
+const selectImageData = createSelector(
   [selectImageState],
   (state) => state.data,
 );
@@ -14,7 +14,7 @@ const selectImageSize = createSelector(
 );
 
 export const selectFaceLocation = createSelector(
-  [selectImageBoundingBox, selectImageSize],
+  [selectImageData, selectImageSize],
   (data, { width, height }) => {
     if (data && height) {
       return data.map(({ id, box, name }) => {
@@ -33,9 +33,10 @@ export const selectFaceLocation = createSelector(
 );
 
 export const selectPredictionList = createSelector(
-  [selectImageBoundingBox],
-  (data) => data.map(({ id, concepts }) => ({
+  [selectImageData],
+  (data) => data.map(({ id, concepts, box }) => ({
     id,
     concepts,
+    box,
   })),
 );

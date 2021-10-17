@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { HistoryImage } from 'src/model';
+import { HistoryImage, RootState } from 'src/model';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import { useDispatch, useSelector } from 'react-redux';
@@ -13,6 +13,7 @@ import {
 
 const HistoryPanel = () => {
   const dispatch = useDispatch();
+  const imageUrl = useSelector(({ image }: RootState) => image.imageUrl);
   const imageList = useSelector(selectImageList);
   const [drawerIsOpened, setDrawerToggle] = React.useState(false);
 
@@ -21,7 +22,9 @@ const HistoryPanel = () => {
   };
 
   const handleClick = (image : HistoryImage) => {
-    dispatch(getImageFromHistory(image));
+    if (imageUrl !== image.link) {
+      dispatch(getImageFromHistory(image));
+    }
   };
 
   useEffect(() => {
