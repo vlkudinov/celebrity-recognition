@@ -1,11 +1,5 @@
 import styled from '@emotion/styled';
-import {
-  Button, Box, Grid, Drawer,
-} from '@mui/material';
-
-export const HistoryPanelContainer = styled(Grid)({
-  // padding: '0 !important',
-});
+import { Button, Box, Drawer } from '@mui/material';
 
 export const HistoryPanelDrawer = styled(Drawer)({
   '.MuiDrawer-paper': {

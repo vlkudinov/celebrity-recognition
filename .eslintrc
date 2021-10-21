@@ -8,6 +8,11 @@
     "no-param-reassign": ["error", { "props": false }],
     "@typescript-eslint/no-unused-vars": "off",
     "react/jsx-props-no-spreading": "off",
-    "max-len": ["error", { "code": 120, "ignoreStrings": true }]
+    "max-len": ["error", { "code": 120, "ignoreStrings": true }],
+    "object-curly-newline": ["error", {
+      "ObjectPattern": { "multiline": true },
+      "ImportDeclaration": { "multiline": true, "minProperties": 6 },
+      "ExportDeclaration": { "multiline": true, "minProperties": 4 }
+    }]
   }
 }

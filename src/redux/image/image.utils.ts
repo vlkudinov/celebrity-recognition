@@ -1,4 +1,4 @@
-import { ClarifaiBoundingBox } from 'src/model';
+import { ClarifaiBoundingBox, PixelCrop } from 'src/model';
 
 export const createImage = (url: string) : Promise<HTMLImageElement> => new Promise((resolve, reject) => {
   const image = new Image();
@@ -8,13 +8,12 @@ export const createImage = (url: string) : Promise<HTMLImageElement> => new Prom
   image.src = `${process.env.REACT_APP_CORS_PROXY}${url}`;
 });
 
-interface PixelCrop {
-  width: number;
-  height: number;
-  x: number;
-  y: number
-
-}
+export const calculatePixelCrop = (image : HTMLImageElement, boundingBox: ClarifaiBoundingBox) => ({
+  width: (boundingBox.right_col - boundingBox.left_col) * image.width,
+  height: (boundingBox.bottom_row - boundingBox.top_row) * image.height,
+  x: boundingBox.left_col * image.width,
+  y: boundingBox.top_row * image.height,
+});
 
 export const getCroppedImg = async (image: HTMLImageElement, pixelCrop: PixelCrop) : Promise<string> => {
   const canvas = document.createElement('canvas');
@@ -54,10 +53,3 @@ export const getCroppedImg = async (image: HTMLImageElement, pixelCrop: PixelCro
     }, 'image/jpeg');
   });
 };
-
-export const calculatePixelCrop = (image : HTMLImageElement, boundingBox: ClarifaiBoundingBox) => ({
-  width: (boundingBox.right_col - boundingBox.left_col) * image.width,
-  height: (boundingBox.bottom_row - boundingBox.top_row) * image.height,
-  x: boundingBox.left_col * image.width,
-  y: boundingBox.top_row * image.height,
-});

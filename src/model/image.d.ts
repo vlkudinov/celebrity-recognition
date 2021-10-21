@@ -43,3 +43,10 @@ export interface ImageState {
   error: Error | null;
   data: ImageData[] | [];
 }
+
+export interface PixelCrop {
+  width: number;
+  height: number;
+  x: number;
+  y: number
+}

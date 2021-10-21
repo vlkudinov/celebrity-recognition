@@ -1,24 +1,20 @@
 import React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import MenuItem from '@mui/material/MenuItem';
-import IconButton from '@mui/material/IconButton';
 import Avatar from 'src/components/avatar/avatar.component';
-import Menu from '@mui/material/Menu';
 import { Link as RouterLink } from 'react-router-dom';
 import Logo from 'src/components/logo/logo.component';
 import { setProfileOpen, signOutStart } from 'src/redux/user/user.reducer';
-import { MenuLink } from 'src/components/navigation/navigation.styles';
-import { useDispatch, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import ProfileModal from 'src/components/profile-modal/profile-modal.component';
 import { RootState } from 'src/model';
+import { AppBar, Toolbar, MenuItem, IconButton, Menu } from '@mui/material';
+import { MenuLink } from 'src/components/navigation/navigation.styles';
 
 const Navigation : React.FC = () => {
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const userCredentials = useSelector((state: RootState) => state.user.credentials);
-  const isSignedIn = useSelector((state: RootState) => state.user.isSignedIn);
   const dispatch = useDispatch();
+  const userCredentials = useSelector((state: RootState) => state.user.credentials, shallowEqual);
+  const isSignedIn = useSelector((state: RootState) => state.user.isSignedIn);
 
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };

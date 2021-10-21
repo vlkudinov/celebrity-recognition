@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  SnackbarKey, useSnackbar,
-} from 'notistack';
+import { SnackbarKey, useSnackbar } from 'notistack';
 import { removeSnackbar } from 'src/redux/snackbar/snackbar.reducer';
 import { Notification, RootState } from 'src/model';
 
@@ -22,9 +20,7 @@ const useNotifier = () => {
   };
 
   useEffect(() => {
-    notifications.forEach(({
-      key, message, options = {}, dismissed = false,
-    }: Notification) => {
+    notifications.forEach(({ key, message, options = {}, dismissed = false }: Notification) => {
       if (dismissed) {
         closeSnackbar(key);
         return;

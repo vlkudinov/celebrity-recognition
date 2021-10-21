@@ -1,10 +1,6 @@
-import {
-  takeLatest, call, put, all, select,
-} from 'redux-saga/effects';
+import { takeLatest, call, put, all, select } from 'redux-saga/effects';
 import { PayloadAction } from '@reduxjs/toolkit';
-import {
-  SignInPayload, SignUpPayload, UpdateProfilePayload, UserAuthResponse,
-} from 'src/model/user';
+import { SignInPayload, SignUpPayload, UpdateProfilePayload, UserAuthResponse } from 'src/model/user';
 import { RootState, UserCredentials } from 'src/model';
 import * as api from 'src/api';
 import {
@@ -28,7 +24,7 @@ import {
 import { setToken, removeToken } from './user.utils';
 import { selectUserFullName } from './user.selectors';
 
-function* getSnapshotFromUserAuth(userAuth : UserAuthResponse) {
+function* getUserAuth(userAuth : UserAuthResponse) {
   try {
     yield call(setToken, userAuth.token);
     yield put(signInSuccess(userAuth));
@@ -41,7 +37,7 @@ function* signInWorker({ payload } : PayloadAction<SignInPayload>) {
   try {
     const userAuth: UserAuthResponse = yield call(api.post, 'sign-in', payload);
 
-    yield getSnapshotFromUserAuth(userAuth);
+    yield getUserAuth(userAuth);
   } catch (error) {
     yield call(removeToken);
     yield put(signInFailure(error));
@@ -105,7 +101,7 @@ function* signUpWatcher() {
 }
 
 function* signInAfterSignUp({ payload } : PayloadAction<UserAuthResponse>) {
-  yield getSnapshotFromUserAuth(payload);
+  yield getUserAuth(payload);
 }
 
 function* onSignUpSuccess() {

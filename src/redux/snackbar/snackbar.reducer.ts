@@ -20,12 +20,6 @@ const snackbarSlice = createSlice({
         newNotification,
       ];
     },
-    closeSnackbar: (state: SnackbarState, action: PayloadAction<SnackbarKey>) => {
-      state.notifications = state.notifications.map((notification) => (
-        notification.key === action.payload
-          ? { ...notification, dismissed: true }
-          : { ...notification }));
-    },
     removeSnackbar: (state: SnackbarState, action: PayloadAction<SnackbarKey>) => {
       state.notifications = state.notifications.filter(
         (notification) => notification.key !== action.payload,
@@ -36,7 +30,6 @@ const snackbarSlice = createSlice({
 
 export const {
   enqueueSnackbar,
-  closeSnackbar,
   removeSnackbar,
 } = snackbarSlice.actions;
 

@@ -1,4 +1,6 @@
-const url = process.env.REACT_APP_API_URL || 'http://loclahost:5000';
+import { getToken } from 'src/redux/user/user.utils';
+
+const url = process.env.REACT_APP_API_URL || 'http://localhost:5000';
 
 const handleResponse = async<T> (res: Response) : Promise<T> => {
   const json = await res.json();
@@ -14,7 +16,7 @@ async function post<T, U>(path: string, body: U): Promise<T> {
     method: 'post',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: window.sessionStorage.getItem('token') || '',
+      Authorization: getToken() || '',
     },
     body: JSON.stringify(body),
   });
@@ -27,7 +29,7 @@ async function get<T>(path: string): Promise<T> {
     method: 'get',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: window.sessionStorage.getItem('token') || '',
+      Authorization: getToken() || '',
     },
   });
 

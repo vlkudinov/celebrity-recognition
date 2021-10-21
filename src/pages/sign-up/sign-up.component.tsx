@@ -1,30 +1,19 @@
-import * as React from 'react';
-import TextField from '@mui/material/TextField';
-import { Link as RouterLink } from 'react-router-dom';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useState } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 import { RootState } from 'src/model';
 import { signUpStart } from 'src/redux/user/user.reducer';
 import Loader from 'src/components/loader/loader.component';
-import {
-  BoxStyled, AvatarStyled, Form, SubmitButton,
-} from './sign-up.styles';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import { Link, Grid, Typography, Container, TextField } from '@mui/material';
+import { BoxStyled, AvatarStyled, Form, SubmitButton } from 'src/pages/sign-up/sign-up.styles';
 
-export default function SignUpPage() {
+const SignUpPage: React.FC = () => {
   const dispatch = useDispatch();
-  const initialState = {
-    email: '', password: '', firstName: '', lastName: '',
-  };
-  const [userCredentials, setCredentials] = useState(initialState);
-  const {
-    email, password, firstName, lastName,
-  } = userCredentials;
   const loading = useSelector(({ user }: RootState) => user.loading);
+  const initialState = { email: '', password: '', firstName: '', lastName: '' };
+  const [userCredentials, setCredentials] = useState(initialState);
+  const { email, password, firstName, lastName } = userCredentials;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -113,4 +102,6 @@ export default function SignUpPage() {
       </BoxStyled>
     </Container>
   );
-}
+};
+
+export default SignUpPage;

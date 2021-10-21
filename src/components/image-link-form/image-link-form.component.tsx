@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import InputAdornment from '@mui/material/InputAdornment';
 import { RootState } from 'src/model';
 import { saveInput, sendImageStart } from 'src/redux/image/image.reducer';
-import { BlackClearIcon, WhiteBorderTextField } from './image-link-form.styles';
+import { BlackClearIcon, WhiteBorderTextField } from 'src/components/image-link-form/image-link-form.styles';
 
 const ImageLinkForm = () => {
   const dispatch = useDispatch();

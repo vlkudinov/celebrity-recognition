@@ -1,6 +1,4 @@
-import Typography from '@mui/material/Typography';
-import Stack from '@mui/material/Stack';
-import Box from '@mui/material/Box';
+import { Stack, Box, Typography } from '@mui/material';
 import styled from '@emotion/styled';
 
 export const ModalBox = styled(Box)(({ theme }) => ({

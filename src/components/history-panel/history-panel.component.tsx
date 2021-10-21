@@ -1,20 +1,15 @@
 import React, { useEffect } from 'react';
 import { HistoryImage, RootState } from 'src/model';
-import ImageList from '@mui/material/ImageList';
-import ImageListItem from '@mui/material/ImageListItem';
-import { useDispatch, useSelector } from 'react-redux';
-import { ImageListItemBar, ListSubheader } from '@mui/material';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { getHistoryStart } from 'src/redux/history/history.reducer';
 import { getImageFromHistory } from 'src/redux/image/image.reducer';
-import { selectImageList } from 'src/redux/history/history.selectors';
-import {
-  VerticalButton, ButtonPanel, HistoryPanelContainer, HistoryPanelDrawer,
-} from './history-panel.styles';
+import { Grid, ImageList, ImageListItem, ImageListItemBar, ListSubheader } from '@mui/material';
+import { VerticalButton, ButtonPanel, HistoryPanelDrawer } from 'src/components/history-panel/history-panel.style';
 
 const HistoryPanel = () => {
   const dispatch = useDispatch();
   const imageUrl = useSelector(({ image }: RootState) => image.imageUrl);
-  const imageList = useSelector(selectImageList);
+  const imageList = useSelector(({ history }: RootState) => history.images, shallowEqual);
   const [drawerIsOpened, setDrawerToggle] = React.useState(false);
 
   const toggleDrawer = () => {
@@ -32,7 +27,7 @@ const HistoryPanel = () => {
   }, [dispatch]);
 
   return (
-    <HistoryPanelContainer item hidden={!imageList.length}>
+    <Grid item hidden={!imageList.length}>
       <ButtonPanel>
         <VerticalButton onClick={toggleDrawer} fullWidth variant="text" sx={{ color: '#fff' }}>HISTORY</VerticalButton>
       </ButtonPanel>
@@ -65,7 +60,7 @@ const HistoryPanel = () => {
           ))}
         </ImageList>
       </HistoryPanelDrawer>
-    </HistoryPanelContainer>
+    </Grid>
   );
 };
 

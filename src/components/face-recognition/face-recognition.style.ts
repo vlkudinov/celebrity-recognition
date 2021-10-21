@@ -1,14 +1,9 @@
 import styled from '@emotion/styled';
 import { BoundingBox } from 'src/model';
 import { Theme } from '@emotion/react';
-import React from 'react';
 
-interface ResultProps {
+interface BoundingBoxProps {
   theme?: Theme;
-  children? : React.ReactNode;
-}
-
-interface BoundingBoxProps extends ResultProps {
   faceLocation: BoundingBox | null;
   show: boolean;
 }
@@ -22,9 +17,7 @@ export const FaceRecognitionImage = styled.img({
   height: 560,
 });
 
-export const FaceRecognitionBoundingBox = styled.div(({
-  theme, faceLocation, show,
-}: BoundingBoxProps) => ({
+export const FaceRecognitionBoundingBox = styled.div(({ theme, faceLocation, show }: BoundingBoxProps) => ({
   display: 'flex',
   opacity: show ? 1 : 0,
   justifyContent: 'flex-start',
@@ -39,9 +32,7 @@ export const FaceRecognitionBoundingBox = styled.div(({
   boxShadow: `0 0 0 2px ${theme?.palette.primary.main} inset`,
 }));
 
-export const FaceRecognitionResult = styled.span(({
-  theme, children,
-}: ResultProps) => ({
+export const FaceRecognitionResult = styled.span(({ theme, children }) => ({
   display: children ? 'block' : 'none',
   backgroundColor: theme?.palette.primary.main,
   color: theme?.palette.text.primary,

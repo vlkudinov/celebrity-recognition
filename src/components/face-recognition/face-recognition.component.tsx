@@ -3,8 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setImageSize } from 'src/redux/image/image.reducer';
 import { RootState } from 'src/model';
 import { selectFaceLocation } from 'src/redux/image/image.selectors';
-import Skeleton from '@mui/material/Skeleton';
-import Typography from '@mui/material/Typography';
+import { Skeleton, Typography } from '@mui/material';
 import {
   FaceRecognitionBoundingBox,
   FaceRecognitionContainer,

@@ -1,6 +1,4 @@
-import {
-  takeLatest, call, put, all, select,
-} from 'redux-saga/effects';
+import { takeLatest, call, put, all, select } from 'redux-saga/effects';
 import { HistoryImage, RootState, ImageData } from 'src/model';
 import * as api from 'src/api';
 import {
@@ -28,8 +26,8 @@ function* updateHistoryWorker() {
     const userId : string = yield select(({ user }: RootState) => user.id);
     const imageUrl : string = yield select(({ image }: RootState) => image.imageUrl);
     const data : ImageData[] | [] = yield select(({ image }: RootState) => image.data);
-    yield call(api.post, 'image', {
-      imageUrl, id: userId, data,
+    yield call(api.post, `history/${userId}`, {
+      imageUrl, data,
     });
     yield put(updateHistorySuccess());
     yield put(getHistoryStart());

@@ -1,5 +1,5 @@
-import Avatar from '@mui/material/Avatar';
 import styled from '@emotion/styled';
+import { Avatar } from '@mui/material';
 import { AvatarProps } from './avatar.interface';
 
 const smallAvatar = {

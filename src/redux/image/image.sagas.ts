@@ -1,11 +1,7 @@
-import {
-  takeLatest, call, put, all, select,
-} from 'redux-saga/effects';
+import { takeLatest, call, put, all, select } from 'redux-saga/effects';
 import { RootState, ImageData } from 'src/model';
 import * as api from 'src/api';
-import {
-  updateHistoryStart,
-} from 'src/redux/history/history.reducer';
+import { updateHistoryStart } from 'src/redux/history/history.reducer';
 import { signOutSuccess } from 'src/redux/user/user.reducer';
 import {
   sendImageStart,
@@ -16,7 +12,7 @@ import {
 function* sendImageWorker() {
   try {
     const input : string = yield select(({ image }: RootState) => image.input);
-    const image: ImageData[] | [] = yield call(api.post, 'imageurl', { input });
+    const image: ImageData[] | [] = yield call(api.post, 'image', { input });
     yield put(sendImageSuccess(image));
     yield put(updateHistoryStart());
   } catch (error) {

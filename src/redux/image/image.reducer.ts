@@ -1,7 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import {
-  HistoryImage, ImageState, ImageData,
-} from 'src/model';
+import { HistoryImage, ImageState, ImageData } from 'src/model';
 
 const imageSlice = createSlice({
   name: 'image',

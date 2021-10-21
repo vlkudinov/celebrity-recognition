@@ -1,7 +1,5 @@
 import { PayloadAction } from '@reduxjs/toolkit';
-import {
-  all, call, put, takeLatest,
-} from 'redux-saga/effects';
+import { all, call, put, takeLatest } from 'redux-saga/effects';
 import { enqueueSnackbar } from 'src/redux/snackbar/snackbar.reducer';
 import { sendImageFailure } from 'src/redux/image/image.reducer';
 import {
@@ -29,12 +27,9 @@ function* onError() {
   yield takeLatest(signInFailure, showErrorSnackbar);
   yield takeLatest(signUpFailure, showErrorSnackbar);
   yield takeLatest(signOutFailure, showErrorSnackbar);
-
   yield takeLatest(getProfileFailure, showErrorSnackbar);
   yield takeLatest(updateProfileFailure, showErrorSnackbar);
-
   yield takeLatest(sendImageFailure, showErrorSnackbar);
-
   yield takeLatest(getHistoryFailure, showErrorSnackbar);
   yield takeLatest(updateHistoryFailure, showErrorSnackbar);
 }

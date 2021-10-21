@@ -1,7 +1,5 @@
 import React, { useEffect } from 'react';
-import {
-  Switch, Route,
-} from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'src/model';
 import Navigation from 'src/components/navigation/navigation.component';
@@ -13,7 +11,7 @@ import { GlobalStyles } from 'src/global.styles';
 import { getToken } from 'src/redux/user/user.utils';
 import useNotifier from 'src/hooks/useNotifier';
 
-export default function App() {
+const App: React.FC = () => {
   useNotifier();
   const dispatch = useDispatch();
   const isSignedIn = useSelector((state: RootState) => state.user.isSignedIn);
@@ -37,4 +35,6 @@ export default function App() {
       </Switch>
     </>
   );
-}
+};
+
+export default App;

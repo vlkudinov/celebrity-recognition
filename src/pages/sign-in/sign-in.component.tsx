@@ -1,22 +1,15 @@
 import React, { useState } from 'react';
-import TextField from '@mui/material/TextField';
-import Grid from '@mui/material/Grid';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
 import { Link as RouterLink } from 'react-router-dom';
-import Link from '@mui/material/Link';
-import Loader from 'src/components/loader/loader.component';
 import { RootState } from 'src/model';
 import { useDispatch, useSelector } from 'react-redux';
 import { signInStart } from 'src/redux/user/user.reducer';
-import {
-  BoxStyled, AvatarStyled, Form, SubmitButton,
-} from './sign-in.styles';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import Loader from 'src/components/loader/loader.component';
+import { Link, Container, Typography, Grid, TextField } from '@mui/material';
+import { BoxStyled, AvatarStyled, Form, SubmitButton } from 'src/pages/sign-in/sign-in.styles';
 
-export default function SignInPage() {
+const SignInPage: React.FC = () => {
   const dispatch = useDispatch();
-
   const initialState = { email: '', password: '' };
   const [userCredentials, setCredentials] = useState(initialState);
   const { email, password } = userCredentials;
@@ -81,4 +74,6 @@ export default function SignInPage() {
       </BoxStyled>
     </Container>
   );
-}
+};
+
+export default SignInPage;

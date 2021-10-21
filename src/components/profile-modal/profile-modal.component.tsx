@@ -1,33 +1,23 @@
-import * as React from 'react';
-import Backdrop from '@mui/material/Backdrop';
-import Box from '@mui/material/Box';
-import Modal from '@mui/material/Modal';
-import Fade from '@mui/material/Fade';
-import TextField from '@mui/material/TextField';
-import Divider from '@mui/material/Divider';
-import Button from '@mui/material/Button';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setProfileOpen, updateProfileStart } from 'src/redux/user/user.reducer';
 import { RootState } from 'src/model';
+import { selectUserFullName } from 'src/redux/user/user.selectors';
 import AccountBoxRoundedIcon from '@mui/icons-material/AccountBoxRounded';
 import ImageRoundedIcon from '@mui/icons-material/ImageRounded';
 import DateRangeRoundedIcon from '@mui/icons-material/DateRangeRounded';
-import Avatar from 'src/components/avatar/avatar.component';
-import { selectUserFullName } from 'src/redux/user/user.selectors';
-import { useState } from 'react';
-import { selectHistoryLength } from 'src/redux/history/history.selectors';
 import {
-  ModalBox, ModalProfileSubtitle, ModalAvatarContainer, ModalButtonGroup,
-} from './profile-modal.styles';
+  Backdrop, Box, Modal, Fade, TextField, Divider, Button,
+} from '@mui/material';
+import Avatar from 'src/components/avatar/avatar.component';
+import { ModalBox, ModalProfileSubtitle, ModalAvatarContainer, ModalButtonGroup } from 'src/components/profile-modal/profile-modal.styles';
 
 const ProfileModal = () => {
   const dispatch = useDispatch();
   const isProfileOpened = useSelector(({ user } : RootState) => user.isProfileOpened);
-  const {
-    firstName, lastName, joined, age,
-  } = useSelector(({ user } : RootState) => user.credentials!);
+  const { firstName, lastName, joined, age } = useSelector(({ user } : RootState) => user.credentials!);
   const fullName = useSelector(selectUserFullName);
-  const entries = useSelector(selectHistoryLength);
+  const entries = useSelector(({ history } : RootState) => history.images.length);
 
   const initialState = { firstName, lastName, age };
   const [userCredentials, setCredentials] = useState(initialState);

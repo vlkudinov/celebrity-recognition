@@ -1,10 +1,7 @@
 import React from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
-import { BackdropStyled } from './loader.styles';
-
-interface LoaderProps {
-  loading: boolean;
-}
+import { LoaderProps } from 'src/components/loader/loader.interface';
+import { BackdropStyled } from 'src/components/loader/loader.styles';
 
 const Loader: React.FC<LoaderProps> = ({ loading }) => (
   <BackdropStyled open={loading}>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { SnackbarKey, SnackbarProvider, SnackbarProviderProps } from 'notistack';
-import ClearIcon from '@mui/icons-material/Clear';
-import IconButton from '@mui/material/IconButton';
+import { IconButton } from '@mui/material';
+import { ClearIconWhite } from 'src/components/customized-snackbar-provider/customized-snackbar-provider.style';
 
 const CustomizedSnackbarProvider: React.FC<SnackbarProviderProps> = ({ children, ...props }: SnackbarProviderProps) => {
   const notistackRef = React.createRef<SnackbarProvider>();
@@ -14,7 +14,7 @@ const CustomizedSnackbarProvider: React.FC<SnackbarProviderProps> = ({ children,
       ref={notistackRef}
       action={(key) => (
         <IconButton aria-label="delete" onClick={onClickDismiss(key)}>
-          <ClearIcon sx={{ color: 'white' }} />
+          <ClearIconWhite />
         </IconButton>
       )}
       {...props}

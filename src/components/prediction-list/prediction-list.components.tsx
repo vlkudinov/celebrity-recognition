@@ -1,24 +1,20 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import Typography from '@mui/material/Typography';
 import { selectPredictionList } from 'src/redux/image/image.selectors';
 import { getHoveredFaceId } from 'src/redux/image/image.reducer';
 import CroppedFace from 'src/components/cropped-face/cropped-face.component';
+import { Typography } from '@mui/material';
 import {
   PredictionListContainer,
   PredictionListStyled,
   PredictionListItem,
   PredictionListName,
   PredictionListValue,
-} from './prediction-list.styles';
+} from 'src/components/prediction-list/prediction-list.styles';
 
 const PredictionList = () => {
   const dispatch = useDispatch();
   const predictions = useSelector(selectPredictionList);
-
-  if (!predictions.length) {
-    return <Typography>NO PREDICTIONS</Typography>;
-  }
 
   const handleMouseEnter = (id: string) => {
     dispatch(getHoveredFaceId(id));
@@ -27,6 +23,10 @@ const PredictionList = () => {
   const handleMouseLeave = (id: string) => {
     dispatch(getHoveredFaceId(id));
   };
+
+  if (!predictions.length) {
+    return <Typography>EMPTY</Typography>;
+  }
 
   return (
     <>
