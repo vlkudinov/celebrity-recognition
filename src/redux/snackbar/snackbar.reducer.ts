@@ -2,11 +2,13 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { SnackbarKey } from 'notistack';
 import { SnackbarState, Notification } from 'src/model';
 
+export const initialState = {
+  notifications: [],
+};
+
 const snackbarSlice = createSlice({
   name: 'snackbar',
-  initialState: {
-    notifications: [],
-  },
+  initialState,
   reducers: {
     enqueueSnackbar: (state: SnackbarState, action: PayloadAction<Notification>) => {
       const key = new Date().getTime() + Math.random();

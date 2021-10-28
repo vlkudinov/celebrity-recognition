@@ -16,7 +16,6 @@ export const store = configureStore({
   reducer: rootReducer,
   devTools: DEV,
   middleware: [logger, sagaMiddleware],
-
 });
 
 sagaMiddleware.run(rootSaga);

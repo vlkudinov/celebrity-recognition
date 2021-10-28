@@ -3,16 +3,18 @@ import {
   UserCredentials, UserState, SignInPayload, SignUpPayload, UpdateProfilePayload, UserAuthResponse,
 } from 'src/model';
 
+export const initialState : UserState = {
+  id: null,
+  credentials: null,
+  isSignedIn: false,
+  isProfileOpened: false,
+  loading: false,
+  error: null,
+};
+
 const userSlice = createSlice({
   name: 'user',
-  initialState: {
-    id: null,
-    credentials: null,
-    isSignedIn: false,
-    isProfileOpened: false,
-    loading: false,
-    error: null,
-  },
+  initialState,
   reducers: {
     signInStart: (state: UserState, _: PayloadAction<SignInPayload | undefined>) => {
       state.loading = true;

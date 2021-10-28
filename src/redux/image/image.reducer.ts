@@ -1,18 +1,20 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { HistoryImage, ImageState, ImageData } from 'src/model';
 
+export const initialState : ImageState = {
+  id: '',
+  input: '',
+  imageUrl: '',
+  width: 0,
+  height: 0,
+  loading: false,
+  error: null,
+  data: [],
+};
+
 const imageSlice = createSlice({
   name: 'image',
-  initialState: {
-    id: '',
-    input: '',
-    imageUrl: '',
-    width: 0,
-    height: 0,
-    loading: false,
-    error: null,
-    data: [],
-  },
+  initialState,
   reducers: {
     saveInput: (state: ImageState, action: PayloadAction<string>) => {
       state.input = action.payload;

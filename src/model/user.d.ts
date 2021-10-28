@@ -26,7 +26,6 @@ export interface UserAuthResponse extends UserId{
 }
 
 export interface UserCredentials {
-  id?: number;
   firstName: string;
   lastName: string;
   email: string;
