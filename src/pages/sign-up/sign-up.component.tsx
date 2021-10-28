@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, Redirect } from 'react-router-dom';
 import { RootState } from 'src/model';
 import { signUpStart } from 'src/redux/user/user.reducer';
 import Loader from 'src/components/loader/loader.component';
@@ -11,6 +11,7 @@ import { BoxStyled, AvatarStyled, Form, SubmitButton } from 'src/pages/sign-up/s
 const SignUpPage: React.FC = () => {
   const dispatch = useDispatch();
   const loading = useSelector(({ user }: RootState) => user.loading);
+  const isSignedIn = useSelector((state: RootState) => state.user.isSignedIn);
   const initialState = { email: '', password: '', firstName: '', lastName: '' };
   const [userCredentials, setCredentials] = useState(initialState);
   const { email, password, firstName, lastName } = userCredentials;
@@ -24,6 +25,10 @@ const SignUpPage: React.FC = () => {
   const handleChange = ({ target: { value, name } } : React.ChangeEvent<HTMLInputElement>) => {
     setCredentials({ ...userCredentials, [name]: value });
   };
+
+  if (isSignedIn) {
+    return <Redirect to="/" />;
+  }
 
   return (
     <Container component="main" maxWidth="xs">

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from 'src/model';
+import { useDispatch } from 'react-redux';
+import PrivateRoute from 'src/components/private-route/private-route.component';
 import Navigation from 'src/components/navigation/navigation.component';
 import HomePage from 'src/pages/home/home.component';
 import SignInPage from 'src/pages/sign-in/sign-in.component';
@@ -14,7 +14,6 @@ import useNotifier from 'src/hooks/useNotifier';
 const App: React.FC = () => {
   useNotifier();
   const dispatch = useDispatch();
-  const isSignedIn = useSelector((state: RootState) => state.user.isSignedIn);
 
   useEffect(() => {
     const token = getToken();
@@ -29,9 +28,9 @@ const App: React.FC = () => {
       <GlobalStyles />
       <Navigation />
       <Switch>
-        <Route exact path="/sign-in" render={() => (isSignedIn ? <HomePage /> : <SignInPage />)} />
-        <Route exact path="/sign-up" render={() => (isSignedIn ? <HomePage /> : <SignUpPage />)} />
-        <Route exact path="/" render={() => (isSignedIn ? <HomePage /> : <SignInPage />)} />
+        <PrivateRoute exact component={HomePage} path="/" />
+        <Route exact component={SignUpPage} path="/sign-up" />
+        <Route exact component={SignInPage} path="/sign-in" />
       </Switch>
     </>
   );

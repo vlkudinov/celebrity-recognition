@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, Redirect } from 'react-router-dom';
 import { RootState } from 'src/model';
 import { useDispatch, useSelector } from 'react-redux';
 import { signInStart } from 'src/redux/user/user.reducer';
@@ -10,10 +10,11 @@ import { BoxStyled, AvatarStyled, Form, SubmitButton } from 'src/pages/sign-in/s
 
 const SignInPage: React.FC = () => {
   const dispatch = useDispatch();
+  const isSignedIn = useSelector((state: RootState) => state.user.isSignedIn);
+  const loading = useSelector(({ user }: RootState) => user.loading);
   const initialState = { email: '', password: '' };
   const [userCredentials, setCredentials] = useState(initialState);
   const { email, password } = userCredentials;
-  const loading = useSelector(({ user }: RootState) => user.loading);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -24,6 +25,10 @@ const SignInPage: React.FC = () => {
   const handleChange = ({ target: { value, name } } : React.ChangeEvent<HTMLInputElement>) => {
     setCredentials({ ...userCredentials, [name]: value });
   };
+
+  if (isSignedIn) {
+    return <Redirect to="/" />;
+  }
 
   return (
     <Container component="main" maxWidth="xs">
