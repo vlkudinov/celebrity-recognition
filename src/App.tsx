@@ -19,7 +19,7 @@ const App: React.FC = () => {
     const token = getToken();
 
     if (token) {
-      dispatch(signInStart());
+      dispatch(signInStart({}));
     }
   }, [dispatch]);
 

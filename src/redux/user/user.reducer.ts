@@ -16,7 +16,7 @@ const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    signInStart: (state: UserState, _: PayloadAction<SignInPayload | undefined>) => {
+    signInStart: (state: UserState, _: PayloadAction<SignInPayload>) => {
       state.loading = true;
       state.isSignedIn = false;
       state.error = null;

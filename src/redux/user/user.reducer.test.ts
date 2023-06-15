@@ -26,7 +26,7 @@ describe('user reducer', () => {
   });
   describe('user sign in', () => {
     test('should handle user sign in start', () => {
-      const { loading, isSignedIn, error } = userReducer(initialState, signInStart());
+      const { loading, isSignedIn, error } = userReducer(initialState, signInStart({}));
       expect(loading).toBe(true);
       expect(isSignedIn).toBe(false);
       expect(error).toBe(null);

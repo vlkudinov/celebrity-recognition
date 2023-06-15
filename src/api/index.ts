@@ -1,6 +1,6 @@
 import { getToken } from 'src/redux/user/user.utils';
 
-const url = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+const url = process.env.REACT_APP_API_URL || 'http://localhost:5002';
 
 const handleResponse = async<T> (res: Response) : Promise<T> => {
   const json = await res.json();

@@ -12,7 +12,7 @@ import {
   PredictionListValue,
 } from 'src/components/prediction-list/prediction-list.styles';
 
-const PredictionList = () => {
+const PredictionList : React.FC = () => {
   const dispatch = useDispatch();
   const predictions = useSelector(selectPredictionList);
 
